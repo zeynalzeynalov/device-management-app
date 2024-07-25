@@ -1,0 +1,22 @@
+services:
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db_device_management_app'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'MyGoldenFish'
+      MYSQL_ROOT_PASSWORD: 'MyGoldenFish'
+    ports:
+      # <Port exposed> : <MySQL Port running inside container>
+      - '3307:3307'
+    expose:
+      # Opens port 3307 on the container
+      - '3307'
+      # Where our data will be persisted
+    volumes:
+      - mysql-device_management_app:/var/lib/mysql
+# Name of our volume
+volumes:
+  mysql-device_management_app:
