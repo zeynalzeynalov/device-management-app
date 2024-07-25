@@ -4,7 +4,6 @@ import org.abc.app.device.Device;
 import org.abc.app.device.DeviceRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,9 +16,12 @@ public class DeviceService {
     }
 
     public List<Device> getAll() {
+        return deviceRepository.findAll();
+    }
 
+    public void create() {
         //TODO: implement method body
-
-        return new ArrayList<>();
+        Device device = Device.builder().name("Device test").brand("Brand test").build();
+        deviceRepository.save(device);
     }
 }
