@@ -1,5 +1,6 @@
 package org.abc.app.api;
 
+import org.abc.app.common.RestResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class DeviceController {
     }
 
     @GetMapping("/status")
-    public ResponseEntity<String> checkStatus() {
-        return ResponseEntity.ok("API is running.");
+    public ResponseEntity<RestResponse> checkStatus() {
+        return ResponseEntity.ok(new RestResponse("API is running."));
     }
 }
