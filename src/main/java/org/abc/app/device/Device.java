@@ -1,28 +1,42 @@
 package org.abc.app.device;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
+@Getter
+@Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "device")
 public class Device {
 
+    @JsonProperty("id")
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonProperty("name")
+    @Column(length = 50)
+    private String name;
+
+    @JsonProperty("brand")
+    @Column(length = 50)
+    private String brand;
+
+    @JsonProperty("createdAt")
     @CreationTimestamp
     private Date createdAt = new Date();
 
+    @JsonProperty("updatedAt")
     @UpdateTimestamp
     private Date updatedAt = new Date();
-
-    @Column(length = 50)
-    public String name;
-
-    @Column(length = 50)
-    public String brand;
 }
