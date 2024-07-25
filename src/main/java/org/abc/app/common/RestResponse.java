@@ -1,5 +1,8 @@
 package org.abc.app.common;
 
+import lombok.Data;
+
+@Data
 public class RestResponse {
 
     // Constants representing common response statuses
