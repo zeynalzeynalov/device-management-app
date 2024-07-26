@@ -31,4 +31,11 @@ public class DeviceController {
 
         return ResponseEntity.ok(new RestResponse(request));
     }
+
+    @PutMapping("/{deviceId}")
+    public ResponseEntity<RestResponse> update(@PathVariable long deviceId, @RequestBody DeviceCreateUpdateRequest request) {
+        deviceService.update(deviceId, request);
+
+        return ResponseEntity.ok(new RestResponse(request));
+    }
 }

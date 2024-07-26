@@ -24,4 +24,15 @@ public class DeviceService {
         Device device = Device.builder().name(request.getName()).brand(request.getBrand()).build();
         deviceRepository.save(device);
     }
+
+    public void update(long deviceId, DeviceCreateUpdateRequest request) {
+        Device device = deviceRepository.findById(deviceId).orElseThrow();
+
+        // TODO: implement partial update logic
+
+        device.setName(request.getName());
+        device.setBrand(request.getBrand());
+
+        deviceRepository.save(device);
+    }
 }
