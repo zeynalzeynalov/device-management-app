@@ -28,6 +28,12 @@ public class DeviceController {
         return ResponseEntity.ok(new RestResponse(deviceService.getById(deviceId)));
     }
 
+    @GetMapping("/filter")
+    @ResponseBody
+    public ResponseEntity<RestResponse> getAllFilteredByBrand(@RequestParam String brand) {
+        return ResponseEntity.ok(new RestResponse(deviceService.getAllFilteredByBrand(brand)));
+    }
+
     @PostMapping("/")
     public ResponseEntity<RestResponse> create(@RequestBody DeviceCreateUpdateRequest request) {
         deviceService.create(request);

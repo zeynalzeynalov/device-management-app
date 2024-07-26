@@ -20,6 +20,10 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
+    public List<Device> getAllFilteredByBrand(String brand) {
+        return deviceRepository.findByBrandContaining(brand);
+    }
+
     public Device getById(long deviceId) {
         // TODO: verify device id
 
