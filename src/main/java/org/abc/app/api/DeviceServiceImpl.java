@@ -38,10 +38,9 @@ public class DeviceServiceImpl implements DeviceService {
     @Transactional
     @Override
     public void create(@Valid DeviceCreateRequest request) {
-        // Sanitize and validate request fields
         Device device = Device.builder()
-                .name(request.getName())
-                .brand(request.getBrand())
+                .name(request.getName().substring(0, 50))
+                .brand(request.getBrand().substring(0, 50))
                 .build();
         deviceRepository.save(device);
     }
