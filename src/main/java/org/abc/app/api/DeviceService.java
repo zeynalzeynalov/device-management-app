@@ -1,8 +1,9 @@
 package org.abc.app.api;
 
 import org.abc.app.device.Device;
-import org.abc.app.device.DeviceCreateUpdateRequest;
+import org.abc.app.device.DeviceCreateRequest;
 import org.abc.app.device.DeviceRepository;
+import org.abc.app.device.DeviceUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,14 +31,14 @@ public class DeviceService {
         return deviceRepository.findById(deviceId).orElseThrow();
     }
 
-    public void create(DeviceCreateUpdateRequest request) {
+    public void create(DeviceCreateRequest request) {
         // TODO: sanitize request fields
 
         Device device = Device.builder().name(request.getName()).brand(request.getBrand()).build();
         deviceRepository.save(device);
     }
 
-    public void update(long deviceId, DeviceCreateUpdateRequest request) {
+    public void update(long deviceId, DeviceUpdateRequest request) {
         verifyDeviceId(deviceId);
 
         Device device = deviceRepository.findById(deviceId).orElseThrow();

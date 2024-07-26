@@ -3,7 +3,7 @@ package org.abc.app.device;
 import lombok.Data;
 
 @Data
-public class DeviceCreateUpdateRequest {
+public class DeviceUpdateRequest {
 
     public String name;
 

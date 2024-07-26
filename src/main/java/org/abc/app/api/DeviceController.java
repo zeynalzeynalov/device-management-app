@@ -2,7 +2,8 @@ package org.abc.app.api;
 
 import lombok.RequiredArgsConstructor;
 import org.abc.app.common.RestResponse;
-import org.abc.app.device.DeviceCreateUpdateRequest;
+import org.abc.app.device.DeviceCreateRequest;
+import org.abc.app.device.DeviceUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,13 +41,13 @@ public class DeviceController {
     }
 
     @PostMapping
-    public ResponseEntity<RestResponse> create(@RequestBody DeviceCreateUpdateRequest request) {
+    public ResponseEntity<RestResponse> create(@RequestBody DeviceCreateRequest request) {
         deviceService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(new RestResponse(request));
     }
 
     @PutMapping("/{deviceId}")
-    public ResponseEntity<RestResponse> update(@PathVariable long deviceId, @RequestBody DeviceCreateUpdateRequest request) {
+    public ResponseEntity<RestResponse> update(@PathVariable long deviceId, @RequestBody DeviceUpdateRequest request) {
         try {
             deviceService.update(deviceId, request);
             return ResponseEntity.ok(new RestResponse(request));
