@@ -31,8 +31,7 @@ public class DeviceController {
     public ResponseEntity<RestResponse> getById(@PathVariable long deviceId) {
         try {
             return ResponseEntity.ok(new RestResponse(deviceService.getById(deviceId)));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.ok(new RestResponse(RestResponse.FAIL, e.getMessage()));
         }
     }
@@ -44,7 +43,7 @@ public class DeviceController {
 
     @PostMapping
     public ResponseEntity<RestResponse> create(@Valid @RequestBody DeviceCreateRequest request, Errors errors) {
-        if(errors.hasErrors()) {
+        if (errors.hasErrors()) {
             return ResponseEntity.ok().body(new RestResponse(RestResponse.FAIL, errors.getFieldErrors().get(0).getDefaultMessage()));
         }
 
@@ -57,8 +56,7 @@ public class DeviceController {
         try {
             deviceService.update(deviceId, request);
             return ResponseEntity.ok(new RestResponse(request));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.ok(new RestResponse(RestResponse.FAIL, e.getMessage()));
         }
     }
@@ -67,8 +65,7 @@ public class DeviceController {
     public ResponseEntity<RestResponse> delete(@PathVariable long deviceId) {
         try {
             return ResponseEntity.ok(new RestResponse(deviceService.delete(deviceId)));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.ok(new RestResponse(RestResponse.FAIL, e.getMessage()));
         }
     }
