@@ -39,4 +39,14 @@ public class DeviceService {
 
         deviceRepository.save(device);
     }
+
+    public boolean delete(long deviceId) {
+        if (deviceRepository.existsById(deviceId)) {
+            deviceRepository.deleteById(deviceId);
+            
+            return true;
+        }
+
+        return false;
+    }
 }

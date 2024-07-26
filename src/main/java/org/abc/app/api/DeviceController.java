@@ -43,4 +43,9 @@ public class DeviceController {
 
         return ResponseEntity.ok(new RestResponse(request));
     }
+
+    @DeleteMapping(path = "/{deviceId}")
+    public ResponseEntity<RestResponse> delete(@PathVariable long deviceId) {
+        return ResponseEntity.ok(new RestResponse(deviceService.delete(deviceId)));
+    }
 }
