@@ -47,8 +47,7 @@ public class DeviceController {
             return ResponseEntity.ok().body(new RestResponse(RestResponse.FAIL, errors.getFieldErrors().get(0).getDefaultMessage()));
         }
 
-        deviceService.create(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new RestResponse(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new RestResponse(deviceService.create(request)));
     }
 
     @PutMapping("/{deviceId}")

@@ -16,7 +16,7 @@ public interface DeviceService {
     Device getById(long deviceId);
 
     @Transactional
-    void create(@Valid DeviceCreateRequest request);
+    Device create(@Valid DeviceCreateRequest request);
 
     @Transactional
     void update(long deviceId, @Valid DeviceUpdateRequest request);

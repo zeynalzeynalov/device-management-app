@@ -37,12 +37,11 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Transactional
     @Override
-    public void create(@Valid DeviceCreateRequest request) {
-        Device device = Device.builder()
-                .name(request.getName().substring(0, 50))
-                .brand(request.getBrand().substring(0, 50))
-                .build();
+    public Device create(@Valid DeviceCreateRequest request) {
+        Device device = Device.builder().name(request.getName().trim()).brand(request.getBrand().trim()).build();
         deviceRepository.save(device);
+
+        return device;
     }
 
     @Transactional
@@ -50,14 +49,13 @@ public class DeviceServiceImpl implements DeviceService {
     public void update(long deviceId, @Valid DeviceUpdateRequest request) {
         verifyDeviceId(deviceId);
 
-        Device device = deviceRepository.findById(deviceId)
-                .orElseThrow(() -> new DeviceRepository.DeviceNotFoundException(deviceId));
+        Device device = deviceRepository.findById(deviceId).get();
 
-        if (request.getName() != null) {
-            device.setName(request.getName());
+        if (request.getName() != null && !request.getName().isBlank()) {
+            device.setName(request.getName().trim());
         }
-        if (request.getBrand() != null) {
-            device.setBrand(request.getBrand());
+        if (request.getBrand() != null && !request.getBrand().isBlank()) {
+            device.setBrand(request.getBrand().trim());
         }
 
         deviceRepository.save(device);
