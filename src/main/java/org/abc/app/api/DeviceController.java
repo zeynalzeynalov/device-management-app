@@ -23,7 +23,7 @@ public class DeviceController {
         return ResponseEntity.ok(new RestResponse(deviceService.getAll()));
     }
 
-    @RequestMapping(value = "/{deviceId}")
+    @GetMapping(value = "/{deviceId}")
     public ResponseEntity<RestResponse> getById(@PathVariable long deviceId) {
         return ResponseEntity.ok(new RestResponse(deviceService.getById(deviceId)));
     }
