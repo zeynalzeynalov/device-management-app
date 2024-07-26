@@ -1,11 +1,13 @@
 package org.abc.app.api;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.abc.app.common.RestResponse;
 import org.abc.app.device.DeviceCreateRequest;
 import org.abc.app.device.DeviceUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/devices")
@@ -41,7 +43,11 @@ public class DeviceController {
     }
 
     @PostMapping
-    public ResponseEntity<RestResponse> create(@RequestBody DeviceCreateRequest request) {
+    public ResponseEntity<RestResponse> create(@Valid @RequestBody DeviceCreateRequest request, Errors errors) {
+        if(errors.hasErrors()) {
+            return ResponseEntity.ok().body(new RestResponse(RestResponse.FAIL, errors.getFieldErrors().get(0).getDefaultMessage()));
+        }
+
         deviceService.create(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(new RestResponse(request));
     }

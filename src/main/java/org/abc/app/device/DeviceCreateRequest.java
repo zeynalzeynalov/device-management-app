@@ -1,14 +1,17 @@
 package org.abc.app.device;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 @Data
 public class DeviceCreateRequest {
 
-    @Length(min = 3, max = 50)
+    @NotNull(message = "Device name can not be null")
+    @Length(min = 3, max = 50, message = "Device name must have size of between 3 and 50 characters")
     public String name;
 
-    @Length(min = 3, max = 50)
+    @NotNull(message = "Device brand can not be null")
+    @Length(min = 3, max = 50, message = "Device brand must have size of between 3 and 50 characters")
     public String brand;
 }
