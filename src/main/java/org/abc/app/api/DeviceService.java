@@ -55,10 +55,9 @@ public class DeviceService {
     public boolean delete(long deviceId) {
         if (deviceRepository.existsById(deviceId)) {
             deviceRepository.deleteById(deviceId);
-
             return true;
         }
 
-        return false;
+        throw new IllegalArgumentException(String.format("Device id=%d not found", deviceId));
     }
 }

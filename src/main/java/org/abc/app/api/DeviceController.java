@@ -3,6 +3,7 @@ package org.abc.app.api;
 import lombok.RequiredArgsConstructor;
 import org.abc.app.common.RestResponse;
 import org.abc.app.device.DeviceCreateUpdateRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,38 +19,40 @@ public class DeviceController {
         return ResponseEntity.ok(new RestResponse("API is running."));
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<RestResponse> getAll() {
         return ResponseEntity.ok(new RestResponse(deviceService.getAll()));
     }
 
-    @GetMapping(value = "/{deviceId}")
+    @GetMapping("/{deviceId}")
     public ResponseEntity<RestResponse> getById(@PathVariable long deviceId) {
         return ResponseEntity.ok(new RestResponse(deviceService.getById(deviceId)));
     }
 
     @GetMapping("/filter")
-    @ResponseBody
     public ResponseEntity<RestResponse> getAllFilteredByBrand(@RequestParam String brand) {
         return ResponseEntity.ok(new RestResponse(deviceService.getAllFilteredByBrand(brand)));
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<RestResponse> create(@RequestBody DeviceCreateUpdateRequest request) {
         deviceService.create(request);
-
-        return ResponseEntity.ok(new RestResponse(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new RestResponse(request));
     }
 
     @PutMapping("/{deviceId}")
     public ResponseEntity<RestResponse> update(@PathVariable long deviceId, @RequestBody DeviceCreateUpdateRequest request) {
         deviceService.update(deviceId, request);
-
         return ResponseEntity.ok(new RestResponse(request));
     }
 
-    @DeleteMapping(path = "/{deviceId}")
+    @DeleteMapping("/{deviceId}")
     public ResponseEntity<RestResponse> delete(@PathVariable long deviceId) {
-        return ResponseEntity.ok(new RestResponse(deviceService.delete(deviceId)));
+        try {
+            return ResponseEntity.ok(new RestResponse(deviceService.delete(deviceId)));
+        }
+        catch (Exception e){
+            return ResponseEntity.ok(new RestResponse(RestResponse.FAIL, e.getMessage()));
+        }
     }
 }
