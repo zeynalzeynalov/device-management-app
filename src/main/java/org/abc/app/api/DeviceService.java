@@ -25,7 +25,9 @@ public class DeviceService {
     }
 
     public Device getById(long deviceId) {
-        // TODO: verify device id
+        if (!deviceRepository.existsById(deviceId)) {
+            throw new IllegalArgumentException(String.format("Device id=%d not found", deviceId));
+        }
 
         return deviceRepository.findById(deviceId).orElseThrow();
     }
@@ -38,12 +40,13 @@ public class DeviceService {
     }
 
     public void update(long deviceId, DeviceCreateUpdateRequest request) {
-        // TODO: verify device id
+        if (!deviceRepository.existsById(deviceId)) {
+            throw new IllegalArgumentException(String.format("Device id=%d not found", deviceId));
+        }
 
         Device device = deviceRepository.findById(deviceId).orElseThrow();
 
         // TODO: implement partial update logic
-
         // TODO: sanitize request fields
 
         device.setName(request.getName());
@@ -53,11 +56,11 @@ public class DeviceService {
     }
 
     public boolean delete(long deviceId) {
-        if (deviceRepository.existsById(deviceId)) {
-            deviceRepository.deleteById(deviceId);
-            return true;
+        if (!deviceRepository.existsById(deviceId)) {
+            throw new IllegalArgumentException(String.format("Device id=%d not found", deviceId));
         }
 
-        throw new IllegalArgumentException(String.format("Device id=%d not found", deviceId));
+        deviceRepository.deleteById(deviceId);
+        return true;
     }
 }
