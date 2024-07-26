@@ -1,5 +1,6 @@
 package org.abc.app.api;
 
+import lombok.RequiredArgsConstructor;
 import org.abc.app.common.RestResponse;
 import org.abc.app.device.DeviceCreateUpdateRequest;
 import org.springframework.http.ResponseEntity;
@@ -7,13 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/api/devices")
 @RestController
+@RequiredArgsConstructor
 public class DeviceController {
 
     private final DeviceService deviceService;
-
-    public DeviceController(DeviceService deviceService) {
-        this.deviceService = deviceService;
-    }
 
     @GetMapping("/status")
     public ResponseEntity<RestResponse> checkStatus() {
