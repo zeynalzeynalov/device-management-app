@@ -1,6 +1,7 @@
 package org.abc.app.api;
 
 import org.abc.app.device.Device;
+import org.abc.app.device.DeviceCreateUpdateRequest;
 import org.abc.app.device.DeviceRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +20,8 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
-    public void create() {
-        //TODO: implement method body
-        Device device = Device.builder().name("Device test").brand("Brand test").build();
+    public void create(DeviceCreateUpdateRequest request) {
+        Device device = Device.builder().name(request.getName()).brand(request.getBrand()).build();
         deviceRepository.save(device);
     }
 }
