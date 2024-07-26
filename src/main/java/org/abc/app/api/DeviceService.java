@@ -21,18 +21,26 @@ public class DeviceService {
     }
 
     public Device getById(long deviceId) {
+        // TODO: verify device id
+
         return deviceRepository.findById(deviceId).orElseThrow();
     }
 
     public void create(DeviceCreateUpdateRequest request) {
+        // TODO: sanitize request fields
+
         Device device = Device.builder().name(request.getName()).brand(request.getBrand()).build();
         deviceRepository.save(device);
     }
 
     public void update(long deviceId, DeviceCreateUpdateRequest request) {
+        // TODO: verify device id
+
         Device device = deviceRepository.findById(deviceId).orElseThrow();
 
         // TODO: implement partial update logic
+
+        // TODO: sanitize request fields
 
         device.setName(request.getName());
         device.setBrand(request.getBrand());
@@ -43,7 +51,7 @@ public class DeviceService {
     public boolean delete(long deviceId) {
         if (deviceRepository.existsById(deviceId)) {
             deviceRepository.deleteById(deviceId);
-            
+
             return true;
         }
 
