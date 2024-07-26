@@ -20,6 +20,10 @@ public class DeviceService {
         return deviceRepository.findAll();
     }
 
+    public Device getById(long deviceId) {
+        return deviceRepository.findById(deviceId).orElseThrow();
+    }
+
     public void create(DeviceCreateUpdateRequest request) {
         Device device = Device.builder().name(request.getName()).brand(request.getBrand()).build();
         deviceRepository.save(device);
