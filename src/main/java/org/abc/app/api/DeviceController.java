@@ -26,7 +26,12 @@ public class DeviceController {
 
     @GetMapping("/{deviceId}")
     public ResponseEntity<RestResponse> getById(@PathVariable long deviceId) {
-        return ResponseEntity.ok(new RestResponse(deviceService.getById(deviceId)));
+        try {
+            return ResponseEntity.ok(new RestResponse(deviceService.getById(deviceId)));
+        }
+        catch (Exception e){
+            return ResponseEntity.ok(new RestResponse(RestResponse.FAIL, e.getMessage()));
+        }
     }
 
     @GetMapping("/filter")
@@ -42,8 +47,13 @@ public class DeviceController {
 
     @PutMapping("/{deviceId}")
     public ResponseEntity<RestResponse> update(@PathVariable long deviceId, @RequestBody DeviceCreateUpdateRequest request) {
-        deviceService.update(deviceId, request);
-        return ResponseEntity.ok(new RestResponse(request));
+        try {
+            deviceService.update(deviceId, request);
+            return ResponseEntity.ok(new RestResponse(request));
+        }
+        catch (Exception e){
+            return ResponseEntity.ok(new RestResponse(RestResponse.FAIL, e.getMessage()));
+        }
     }
 
     @DeleteMapping("/{deviceId}")
