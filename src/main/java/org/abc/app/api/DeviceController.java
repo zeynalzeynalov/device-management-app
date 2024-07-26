@@ -17,17 +17,17 @@ public class DeviceController {
 
     private final DeviceService deviceService;
 
-    @GetMapping("/status")
+    @GetMapping("/v1/status")
     public ResponseEntity<RestResponse> checkStatus() {
         return ResponseEntity.ok(new RestResponse("API is running."));
     }
 
-    @GetMapping
+    @GetMapping("/v1")
     public ResponseEntity<RestResponse> getAll() {
         return ResponseEntity.ok(new RestResponse(deviceService.getAll()));
     }
 
-    @GetMapping("/{deviceId}")
+    @GetMapping("/v1/{deviceId}")
     public ResponseEntity<RestResponse> getById(@PathVariable long deviceId) {
         try {
             return ResponseEntity.ok(new RestResponse(deviceService.getById(deviceId)));
@@ -36,12 +36,12 @@ public class DeviceController {
         }
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/v1/filter")
     public ResponseEntity<RestResponse> getAllFilteredByBrand(@RequestParam String brand) {
         return ResponseEntity.ok(new RestResponse(deviceService.getAllFilteredByBrand(brand)));
     }
 
-    @PostMapping
+    @PostMapping("/v1")
     public ResponseEntity<RestResponse> create(@Valid @RequestBody DeviceCreateRequest request, Errors errors) {
         if (errors.hasErrors()) {
             return ResponseEntity.ok().body(new RestResponse(RestResponse.FAIL, errors.getFieldErrors().get(0).getDefaultMessage()));
@@ -50,7 +50,7 @@ public class DeviceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new RestResponse(deviceService.create(request)));
     }
 
-    @PutMapping("/{deviceId}")
+    @PutMapping("/v1/{deviceId}")
     public ResponseEntity<RestResponse> update(@PathVariable long deviceId, @RequestBody DeviceUpdateRequest request) {
         try {
             deviceService.update(deviceId, request);
@@ -60,7 +60,7 @@ public class DeviceController {
         }
     }
 
-    @DeleteMapping("/{deviceId}")
+    @DeleteMapping("/v1/{deviceId}")
     public ResponseEntity<RestResponse> delete(@PathVariable long deviceId) {
         try {
             return ResponseEntity.ok(new RestResponse(deviceService.delete(deviceId)));
