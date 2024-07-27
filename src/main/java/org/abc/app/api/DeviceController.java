@@ -18,7 +18,7 @@ public class DeviceController {
     private final DeviceService deviceService;
 
     @GetMapping("/v1/status")
-    public ResponseEntity<RestResponse> checkStatus() {
+    public ResponseEntity<RestResponse> getApiStatus() {
         return ResponseEntity.ok(new RestResponse("API is running."));
     }
 

@@ -18,6 +18,8 @@ import java.util.List;
 public class DeviceServiceImpl implements DeviceService {
 
     private final DeviceRepository deviceRepository;
+
+    // Jackson object mapper for converting objects to JSON
     private final ObjectMapper objectMapper;
 
     @Override
