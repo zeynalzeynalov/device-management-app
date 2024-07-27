@@ -46,7 +46,12 @@ public class DeviceControllerTest {
 
     @Test
     public void getAllDevices_whenNotEmpty_shouldReturnDevices() throws Exception {
-        Device device = Device.builder().id(1L).name("Test device name").brand("Test device brand").build();
+        Device device = Device.builder()
+                .id(1L)
+                .name("Test device name")
+                .brand("Test device brand")
+                .build();
+
         when(deviceService.getAll()).thenReturn(List.of(device));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/devices/v1"))
@@ -71,7 +76,11 @@ public class DeviceControllerTest {
 
     @Test
     public void getDeviceById_whenExists_shouldReturnDevice() throws Exception {
-        Device device = Device.builder().id(1L).name("Test device name").brand("Test device brand").build();
+        Device device = Device.builder()
+                .id(1L)
+                .name("Test device name")
+                .brand("Test device brand").build();
+
         when(deviceService.getById(1)).thenReturn(device);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/devices/v1/1"))
@@ -85,7 +94,8 @@ public class DeviceControllerTest {
 
     @Test
     public void getDeviceById_whenNotExists_shouldReturnFailure() throws Exception {
-        when(deviceService.getById(666)).thenThrow(new DeviceRepository.DeviceNotFoundException(666));
+        when(deviceService.getById(666))
+                .thenThrow(new DeviceRepository.DeviceNotFoundException(666));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/devices/v1/666"))
                 .andExpect(status().isOk())
@@ -96,7 +106,12 @@ public class DeviceControllerTest {
 
     @Test
     public void getAllDevicesFilteredByBrand_whenExists_shouldReturnFoundDevices() throws Exception {
-        Device device = Device.builder().id(1L).name("Test device name").brand("Test device brand").build();
+        Device device = Device.builder()
+                .id(1L)
+                .name("Test device name")
+                .brand("Test device brand")
+                .build();
+
         when(deviceService.getAllFilteredByBrand("test")).thenReturn(List.of(device));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/devices/v1/filter?brand=test"))
@@ -110,7 +125,12 @@ public class DeviceControllerTest {
 
     @Test
     public void getAllDevicesFilteredByBrand_whenNotExists_shouldReturnEmptyList() throws Exception {
-        Device device = Device.builder().id(1L).name("Test device name").brand("Test device brand").build();
+        Device device = Device.builder()
+                .id(1L)
+                .name("Test device name")
+                .brand("Test device brand")
+                .build();
+
         when(deviceService.getAllFilteredByBrand("test")).thenReturn(List.of(device));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/devices/v1/filter?brand=test_new"))
@@ -126,7 +146,11 @@ public class DeviceControllerTest {
         createRequest.setName("     Created device name      ");
         createRequest.setBrand("      Created device brand         ");
 
-        Device device = Device.builder().id(1L).name(createRequest.name.trim()).brand(createRequest.brand.trim()).build();
+        Device device = Device.builder()
+                .id(1L)
+                .name(createRequest.name.trim())
+                .brand(createRequest.brand.trim())
+                .build();
 
         when(deviceService.create(createRequest)).thenReturn(device);
 
@@ -146,7 +170,11 @@ public class DeviceControllerTest {
         DeviceCreateRequest createRequest = new DeviceCreateRequest();
         createRequest.setName("Created device name");
 
-        Device device = Device.builder().id(1L).name(createRequest.name).brand(createRequest.brand).build();
+        Device device = Device.builder()
+                .id(1L)
+                .name(createRequest.name)
+                .brand(createRequest.brand)
+                .build();
 
         when(deviceService.create(createRequest)).thenReturn(device);
 
@@ -215,7 +243,8 @@ public class DeviceControllerTest {
         updateRequest.setName("Updated device name");
         updateRequest.setBrand(null);
 
-        when(deviceService.update(666, updateRequest)).thenThrow(new DeviceRepository.DeviceNotFoundException(666));
+        when(deviceService.update(666, updateRequest))
+                .thenThrow(new DeviceRepository.DeviceNotFoundException(666));
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/devices/v1/666")
                         .contentType(MediaType.APPLICATION_JSON)
