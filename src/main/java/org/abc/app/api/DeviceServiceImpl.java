@@ -64,7 +64,7 @@ public class DeviceServiceImpl implements DeviceService {
 
         deviceRepository.save(device);
 
-        return deviceRepository.findById(deviceId).get();
+        return device;
     }
 
     @Transactional
