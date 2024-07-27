@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "b86887ca-cee1-411e-a9da-f5bef21e34b7",
+		"name": "Device-management-app-postman-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12786737"
+	},
+	"item": [
+		{
+			"name": "Get API status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1/status",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all devices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get device by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1/5",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all devices filtered by brand",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1/filter?brand=test",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1",
+						"filter"
+					],
+					"query": [
+						{
+							"key": "brand",
+							"value": "test"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create device successfully",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"My device.       \",\n    \"brand\": \"My brand\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create device fail: null field",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"my_device\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create device fail: blank field",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"                                                  \",\n    \"brand\": \"my_brand\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create device fail: invalid field length",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"my_device\",\n    \"brand\": \"m\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update device",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"my_device_updated\",\n    \"brand\": \"my_brand_updated\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1/5",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update device partially",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand\": \"my_brand_updated new\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1/5",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete device by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BackendApiUrl}}api/devices/v1/1",
+					"host": [
+						"{{BackendApiUrl}}api"
+					],
+					"path": [
+						"devices",
+						"v1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "BackendApiUrl",
+			"value": "http://localhost:8080/"
+		}
+	]
+}
