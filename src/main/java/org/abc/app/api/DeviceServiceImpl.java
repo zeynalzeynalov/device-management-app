@@ -1,6 +1,9 @@
 package org.abc.app.api;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.abc.app.device.Device;
 import org.abc.app.device.DeviceCreateRequest;
 import org.abc.app.device.DeviceRepository;
@@ -10,14 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class DeviceServiceImpl implements DeviceService {
 
     private final DeviceRepository deviceRepository;
-
-    public DeviceServiceImpl(DeviceRepository deviceRepository) {
-        this.deviceRepository = deviceRepository;
-    }
+    private final ObjectMapper objectMapper;
 
     @Override
     public List<Device> getAll() {
@@ -49,13 +50,14 @@ public class DeviceServiceImpl implements DeviceService {
     public void update(long deviceId, @Valid DeviceUpdateRequest request) {
         verifyDeviceId(deviceId);
 
+        DeviceUpdateRequest.sanitizeAndSetFields(request);
+
         Device device = deviceRepository.findById(deviceId).get();
 
-        if (request.getName() != null && !request.getName().isBlank()) {
-            device.setName(request.getName().trim());
-        }
-        if (request.getBrand() != null && !request.getBrand().isBlank()) {
-            device.setBrand(request.getBrand().trim());
+        try {
+            objectMapper.updateValue(device, request);
+        } catch (JsonMappingException e) {
+            throw new RuntimeException(e);
         }
 
         deviceRepository.save(device);

@@ -1,11 +1,27 @@
 package org.abc.app.device;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DeviceUpdateRequest {
 
-    public String name;
+    @JsonProperty("name")
+    private String name;
 
-    public String brand;
+    @JsonProperty("brand")
+    private String brand;
+
+    public static void sanitizeAndSetFields(DeviceUpdateRequest request) {
+        if (request.getName() != null && !request.getName().isBlank()) {
+            request.setName(request.getName().trim());
+        }
+        if (request.getBrand() != null && !request.getBrand().isBlank()) {
+            request.setBrand(request.getBrand().trim());
+        }
+    }
 }
