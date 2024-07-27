@@ -1,5 +1,6 @@
-package org.abc.app.device;
+package org.abc.app.repository;
 
+import org.abc.app.device.Device;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

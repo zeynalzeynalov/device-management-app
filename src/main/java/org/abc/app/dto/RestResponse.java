@@ -1,11 +1,15 @@
-package org.abc.app.common;
+package org.abc.app.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class RestResponse {
 
-    // Constants representing common response statuses
+    // Constants representing dto response statuses
     public static final String SUCCESS = "success";
     public static final String FAIL = "fail";
 

@@ -1,10 +1,11 @@
-package org.abc.app.api;
+package org.abc.app.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.abc.app.common.RestResponse;
-import org.abc.app.device.DeviceCreateRequest;
-import org.abc.app.device.DeviceUpdateRequest;
+import org.abc.app.dto.RestResponse;
+import org.abc.app.dto.DeviceCreateRequest;
+import org.abc.app.service.DeviceService;
+import org.abc.app.service.DeviceUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;

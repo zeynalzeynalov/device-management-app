@@ -1,11 +1,12 @@
-package org.abc.app.api;
+package org.abc.app.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.abc.app.common.RestResponse;
+import org.abc.app.dto.RestResponse;
 import org.abc.app.device.Device;
-import org.abc.app.device.DeviceCreateRequest;
-import org.abc.app.device.DeviceRepository;
-import org.abc.app.device.DeviceUpdateRequest;
+import org.abc.app.dto.DeviceCreateRequest;
+import org.abc.app.repository.DeviceRepository;
+import org.abc.app.service.DeviceServiceImpl;
+import org.abc.app.service.DeviceUpdateRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,6 +170,7 @@ public class DeviceControllerTest {
     public void createDevice_whenMissingField_shouldReturnFailure() throws Exception {
         DeviceCreateRequest createRequest = new DeviceCreateRequest();
         createRequest.setName("Created device name");
+        createRequest.setBrand(null);
 
         Device device = Device.builder()
                 .id(1L)

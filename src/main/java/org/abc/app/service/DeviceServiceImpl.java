@@ -1,13 +1,12 @@
-package org.abc.app.api;
+package org.abc.app.service;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.abc.app.device.Device;
-import org.abc.app.device.DeviceCreateRequest;
-import org.abc.app.device.DeviceRepository;
-import org.abc.app.device.DeviceUpdateRequest;
+import org.abc.app.repository.DeviceRepository;
+import org.abc.app.dto.DeviceCreateRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

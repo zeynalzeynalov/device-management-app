@@ -1,4 +1,4 @@
-package org.abc.app.device;
+package org.abc.app.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
