@@ -53,8 +53,7 @@ public class DeviceController {
     @PutMapping("/v1/{deviceId}")
     public ResponseEntity<RestResponse> update(@PathVariable long deviceId, @RequestBody DeviceUpdateRequest request) {
         try {
-            deviceService.update(deviceId, request);
-            return ResponseEntity.ok(new RestResponse(request));
+            return ResponseEntity.ok(new RestResponse(deviceService.update(deviceId, request)));
         } catch (Exception e) {
             return ResponseEntity.ok(new RestResponse(RestResponse.FAIL, e.getMessage()));
         }

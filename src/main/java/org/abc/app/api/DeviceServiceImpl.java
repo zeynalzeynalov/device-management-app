@@ -49,7 +49,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Transactional
     @Override
-    public void update(long deviceId, @Valid DeviceUpdateRequest request) {
+    public Device update(long deviceId, @Valid DeviceUpdateRequest request) {
         verifyDeviceId(deviceId);
 
         DeviceUpdateRequest.sanitizeAndSetFields(request);
@@ -63,6 +63,8 @@ public class DeviceServiceImpl implements DeviceService {
         }
 
         deviceRepository.save(device);
+
+        return deviceRepository.findById(deviceId).get();
     }
 
     @Transactional

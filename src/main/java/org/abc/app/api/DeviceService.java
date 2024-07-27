@@ -19,7 +19,7 @@ public interface DeviceService {
     Device create(@Valid DeviceCreateRequest request);
 
     @Transactional
-    void update(long deviceId, @Valid DeviceUpdateRequest request);
+    Device update(long deviceId, @Valid DeviceUpdateRequest request);
 
     @Transactional
     boolean delete(long deviceId);
