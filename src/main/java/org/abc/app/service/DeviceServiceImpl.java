@@ -41,9 +41,8 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public Device create(@Valid DeviceCreateRequest request) {
         Device device = Device.builder().name(request.getName().trim()).brand(request.getBrand().trim()).build();
-        deviceRepository.save(device);
 
-        return device;
+        return deviceRepository.save(device);
     }
 
     @Transactional
@@ -61,9 +60,7 @@ public class DeviceServiceImpl implements DeviceService {
             throw new RuntimeException(e);
         }
 
-        deviceRepository.save(device);
-
-        return device;
+        return deviceRepository.save(device);
     }
 
     @Transactional
