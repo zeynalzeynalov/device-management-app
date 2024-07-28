@@ -1,8 +1,11 @@
 package org.abc.app.device;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.*;
+
 import lombok.*;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
