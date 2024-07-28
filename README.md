@@ -24,6 +24,11 @@ Executing following script will start application.
 ./start-app.sh
 ```
 
+### Running all tests:
+```
+mvn test
+```
+
 ### Supported REST actions for devices:
 
 **Create**
