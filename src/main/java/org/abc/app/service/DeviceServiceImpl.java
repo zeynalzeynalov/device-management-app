@@ -2,11 +2,15 @@ package org.abc.app.service;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
+
 import org.abc.app.device.Device;
-import org.abc.app.repository.DeviceRepository;
 import org.abc.app.dto.DeviceCreateRequest;
+import org.abc.app.repository.DeviceRepository;
+import org.assertj.core.util.VisibleForTesting;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +23,7 @@ public class DeviceServiceImpl implements DeviceService {
     private final DeviceRepository deviceRepository;
 
     // Jackson object mapper for converting objects to JSON
-    private final ObjectMapper objectMapper;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public List<Device> getAll() {
@@ -34,13 +38,19 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public Device getById(long deviceId) {
         verifyDeviceId(deviceId);
-        return deviceRepository.findById(deviceId).orElseThrow(() -> new DeviceRepository.DeviceNotFoundException(deviceId));
+        return deviceRepository
+                .findById(deviceId)
+                .orElseThrow(() -> new DeviceNotFoundException(deviceId));
     }
 
     @Transactional
     @Override
     public Device create(@Valid DeviceCreateRequest request) {
-        Device device = Device.builder().name(request.getName().trim()).brand(request.getBrand().trim()).build();
+        Device device =
+                Device.builder()
+                        .name(request.getName().trim())
+                        .brand(request.getBrand().trim())
+                        .build();
 
         return deviceRepository.save(device);
     }
@@ -73,7 +83,12 @@ public class DeviceServiceImpl implements DeviceService {
 
     private void verifyDeviceId(long deviceId) {
         if (!deviceRepository.existsById(deviceId)) {
-            throw new DeviceRepository.DeviceNotFoundException(deviceId);
+            throw new DeviceNotFoundException(deviceId);
         }
+    }
+
+    @VisibleForTesting
+    public void setObjectMapper(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 }
