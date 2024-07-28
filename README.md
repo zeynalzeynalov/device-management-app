@@ -48,6 +48,15 @@ Delete
 
 - [GET] http://localhost:8080/api/devices/v1/status
 
+## Tests
+
+- Unit tests are implemented for Device REST Controller for several scenarios under test file:
+  - `src/test/java/org/abc/app/api/DeviceControllerTest.java`
+
+
+- Unit tests are implemented for Device Service for several scenarios under test file:
+  - `src/test/java/org/abc/app/service/DeviceServiceImplTest.java`
+
 ## Additional notes
 
 - REST API supports versions via API URI as:
@@ -61,7 +70,3 @@ Delete
 - How to test API endpoints externally:
   - There is a Postman collection file at the root folder that can be imported to Postman and test endpoints.
   - Collection file: `device-management-app-postman-collection.json`
-
-
-- Unit tests are implemented for Device REST Controller for several scenarions under test file:
-  - `src/test/java/org/abc/app/api/DeviceControllerTest.java`
