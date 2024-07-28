@@ -2,10 +2,12 @@ package org.abc.app.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 @Data
+@Builder(toBuilder = true)
 public class DeviceCreateRequest {
 
     @NotNull(message = "Device name can not be null")
