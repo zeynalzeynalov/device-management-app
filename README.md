@@ -16,7 +16,6 @@ API REST Controller persists devices data at MySQL database via Device Service.
 
 - MySQL
 - Docker Compose
-- Postman
 
 ### Starting the app:
 Executing following script will start application.
